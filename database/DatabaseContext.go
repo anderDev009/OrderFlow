@@ -3,17 +3,25 @@ package database
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"orderflow.com/v2/models"
 )
 
 var dbGorm *gorm.DB
 
 func init() {
-	dsn := "user:pass@mysql/order_flow?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "orderflowuser:orderflowpass@mysql/orderflowdb?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
 	dbGorm = db
+	dbGorm.AutoMigrate(&models.Client{},
+		&models.Customer{},
+		&models.Product{},
+		&models.Storage{},
+		&models.StorageProduct{},
+		&models.Order{},
+		&models.OrderDetail{})
 }
 
 func GetContext() *gorm.DB {
