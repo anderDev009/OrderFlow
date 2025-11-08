@@ -17,7 +17,7 @@
 - Observabilidad completa (métricas, logs, traces)
 - Escalabilidad horizontal mediante contenedores Docker
 
-> ⚙️ Este proyecto no es multi-tenant (por ahora), pero está diseñado para crecer hacia ello en el futuro.
+>  Este proyecto no es multi-tenant (por ahora), pero está diseñado para crecer hacia ello en el futuro.
 
 ---
 

@@ -15,13 +15,16 @@ func init() {
 		panic("failed to connect database")
 	}
 	dbGorm = db
-	dbGorm.AutoMigrate(&models.Client{},
+	errDb := dbGorm.AutoMigrate(&models.Client{},
 		&models.Customer{},
 		&models.Product{},
 		&models.Storage{},
 		&models.StorageProduct{},
 		&models.Order{},
 		&models.OrderDetail{})
+	if errDb != nil {
+		panic("failed to migrate database")
+	}
 }
 
 func GetContext() *gorm.DB {
