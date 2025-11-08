@@ -6,5 +6,8 @@ func main() {
 	server := gin.Default()
 
 	//corriendo el servidor
-	server.Run()
+	err := server.Run()
+	if err != nil {
+		panic("Failed to start the server")
+	}
 }
