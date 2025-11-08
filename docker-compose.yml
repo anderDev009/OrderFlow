@@ -1,0 +1,31 @@
+services:
+#  MYSQL
+  mysql:
+    image: mysql:8.0
+    container_name: order_flow_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: orderflowdb
+      MYSQL_USER: orderflowuser
+      MYSQL_PASSWORD: orderflowpass
+    networks:
+      - api-database-network
+    ports:
+      - "3306:3306"
+
+
+#API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: order_flow_api
+    networks:
+        - api-database-network
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+networks:
+  api-database-network:
+    driver: bridge
