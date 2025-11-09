@@ -26,7 +26,10 @@ func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) GetByID(id uint) (*DtoGet, e
 		return &dto, err
 	}
 	//mapping the entity to dto
-	copier.Copy(&dto, entity)
+	errCopy := copier.Copy(&dto, entity)
+	if errCopy != nil {
+		return &dto, errCopy
+	}
 	return &dto, nil
 }
 
@@ -36,21 +39,30 @@ func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) GetAll() (*[]DtoGet, error) 
 	if err != nil {
 		return &[]DtoGet{}, err
 	}
-	copier.Copy(&dto, entities)
+	errCopy := copier.Copy(&dto, entities)
+	if errCopy != nil {
+		return &[]DtoGet{}, err
+	}
 	return &dto, nil
 }
-func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Create(DtoAdd *DtoAdd) error {
+func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Create(Add *DtoAdd) error {
 	var entity T
-	copier.Copy(&entity, DtoAdd)
+	errCopy := copier.Copy(&entity, Add)
+	if errCopy != nil {
+		return errCopy
+	}
 	err := b.repository.Create(&entity)
 	if err != nil {
 		return err
 	}
 	return nil
 }
-func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Update(DtoUpdate *DtoUpdate) error {
+func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Update(Update *DtoUpdate) error {
 	var entity T
-	copier.Copy(&entity, DtoUpdate)
+	errCopy := copier.Copy(&entity, Update)
+	if errCopy != nil {
+		return errCopy
+	}
 	err := b.repository.Update(&entity)
 	if err != nil {
 		return err
