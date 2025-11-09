@@ -85,3 +85,20 @@ func (c *ProductController) GetProductById(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, product)
 }
+func (c *ProductController) GetProductListWithClientId(ctx *gin.Context) {
+	id, err := strconv.ParseUint(ctx.Param("id"), 10, 64)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	products, err := c.service.GetAllByClientId(uint(id))
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	if len(*products) == 0 {
+		ctx.JSON(http.StatusNotFound, nil)
+		return
+	}
+	ctx.JSON(http.StatusOK, products)
+}

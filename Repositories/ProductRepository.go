@@ -6,14 +6,16 @@ import (
 )
 
 type ProductRepository struct {
-	BaseRepository[models.Product]
+	BaseRepositoryWithClientId[models.Product]
 }
 
 // Constructor
 func NewProductRepository(ctx *gorm.DB) *ProductRepository {
 	return &ProductRepository{
-		BaseRepository: BaseRepository[models.Product]{
-			ctx: ctx,
+		BaseRepositoryWithClientId: BaseRepositoryWithClientId[models.Product]{
+			BaseRepository: BaseRepository[models.Product]{
+				ctx: ctx,
+			},
 		},
 	}
 }

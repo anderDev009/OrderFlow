@@ -6,5 +6,5 @@ import (
 )
 
 type IProductService interface {
-	IBaseService[models.Product, Product.DtoAdd, Product.DtoGet, Product.DtoUpdate]
+	IBaseServiceWithClientId[models.Product, Product.DtoAdd, Product.DtoGet, Product.DtoUpdate]
 }

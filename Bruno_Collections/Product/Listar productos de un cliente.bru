@@ -1,17 +1,17 @@
 meta {
-  name: Obtener un producto por ID
+  name: Listar productos de un cliente
   type: http
-  seq: 3
+  seq: 1
 }
 
 get {
-  url: 127.0.0.1:8080/api/v1/product/get/:id
+  url: 127.0.0.1:8080/api/v1/product/client/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 6
+  id: 1
 }
 
 settings {

@@ -9,6 +9,7 @@ func ConfigureProductRoutes(server *gin.RouterGroup, controller *Controllers.Pro
 	productGroup := server.Group("product")
 	//methods GET
 	productGroup.GET("", controller.ListProducts)
+	productGroup.GET("client/:id", controller.GetProductListWithClientId)
 	productGroup.GET("/get/:id", controller.GetProductById)
 	//CREATE and UPDATE
 	productGroup.POST("", controller.AddProduct)
