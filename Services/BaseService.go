@@ -25,7 +25,7 @@ func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) GetByID(id uint) (*DtoGet, e
 	if err != nil {
 		return &dto, err
 	}
-	//mapping the entity to dto
+	//mapping the entity to Dto
 	errCopy := copier.Copy(&dto, entity)
 	if errCopy != nil {
 		return &dto, errCopy

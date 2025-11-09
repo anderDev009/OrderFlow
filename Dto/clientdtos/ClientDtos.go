@@ -1,13 +1,13 @@
-package client
+package clientdtos
 
-import "orderflow.com/v2/dto"
+import BaseDto "orderflow.com/v2/Dto"
 
 type baseClientDto struct {
 	ClientName string `json:"client_name"`
 	Rnc        string `json:"rnc"`
 }
 type DtoGet struct {
-	dto.BaseDto
+	BaseDto.BaseDto
 	baseClientDto
 }
 type DtoUpdate struct {

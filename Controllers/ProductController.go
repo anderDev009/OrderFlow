@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"orderflow.com/v2/Dto/Productdtos"
 	"orderflow.com/v2/contracts/services"
-	"orderflow.com/v2/dto/Product"
 )
 
 type ProductController struct {
@@ -32,7 +32,7 @@ func (c *ProductController) ListProducts(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, products)
 }
 func (c *ProductController) AddProduct(ctx *gin.Context) {
-	var dtoAdd Product.DtoAdd
+	var dtoAdd Productdtos.DtoAdd
 	if err := ctx.ShouldBind(&dtoAdd); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -46,7 +46,7 @@ func (c *ProductController) AddProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, nil)
 }
 func (c *ProductController) UpdateProduct(ctx *gin.Context) {
-	var dtoUpdate Product.DtoUpdate
+	var dtoUpdate Productdtos.DtoUpdate
 	if err := ctx.ShouldBind(&dtoUpdate); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

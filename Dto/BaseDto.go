@@ -1,4 +1,4 @@
-package dto
+package BaseDto
 
 type BaseDto struct {
 	ID        uint  `json:"id"`

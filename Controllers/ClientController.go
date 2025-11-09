@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"orderflow.com/v2/Dto/clientdtos"
 	"orderflow.com/v2/contracts/services"
-	"orderflow.com/v2/dto/client"
 )
 
 type ClientController struct {
@@ -47,7 +47,7 @@ func (c *ClientController) GetClientById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, clientById)
 }
 func (c *ClientController) CreateClient(ctx *gin.Context) {
-	var add client.DtoAdd
+	var add clientdtos.DtoAdd
 	if err := ctx.ShouldBind(&add); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -60,7 +60,7 @@ func (c *ClientController) CreateClient(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, add)
 }
 func (c *ClientController) UpdateClient(ctx *gin.Context) {
-	var update client.DtoUpdate
+	var update clientdtos.DtoUpdate
 	if err := ctx.ShouldBind(&update); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

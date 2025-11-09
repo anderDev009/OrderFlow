@@ -1,6 +1,6 @@
-package Product
+package Productdtos
 
-import "orderflow.com/v2/dto"
+import "orderflow.com/v2/Dto"
 
 type BaseProductDto struct {
 	ProductName string  `json:"product_name" binding:"required"`
@@ -9,7 +9,7 @@ type BaseProductDto struct {
 	ClientId    uint    `json:"client_id" binding:"required"`
 }
 type DtoGet struct {
-	dto.BaseDto
+	BaseDto.BaseDto
 	BaseProductDto
 }
 type DtoAdd struct {

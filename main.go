@@ -17,14 +17,17 @@ func main() {
 	//repositories
 	clientRepository := Repositories.NewClientRepository(ctx)
 	productRepository := Repositories.NewProductRepository(ctx)
+	customerRepository := Repositories.NewCustomerRepository(ctx)
 	//services
 	clientService := Services.NewClientService(clientRepository)
 	productService := Services.NewProductService(productRepository)
+	customerService := Services.NewCustomerService(customerRepository)
 	//configurando controladores
 	clientController := Controllers.NewClientController(clientService)
 	productController := Controllers.NewProductController(productService)
+	customerController := Controllers.NewCustomerController(customerService)
 	//route v1 config
-	Routes.ConfigureV1(server, clientController, productController)
+	Routes.ConfigureV1(server, clientController, productController, customerController)
 	//running server
 	err := server.Run()
 	if err != nil {
