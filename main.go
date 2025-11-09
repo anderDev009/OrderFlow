@@ -16,12 +16,15 @@ func main() {
 	//dependency injection
 	//repositories
 	clientRepository := Repositories.NewClientRepository(ctx)
+	productRepository := Repositories.NewProductRepository(ctx)
 	//services
 	clientService := Services.NewClientService(clientRepository)
+	productService := Services.NewProductService(productRepository)
 	//configurando controladores
 	clientController := Controllers.NewClientController(clientService)
+	productController := Controllers.NewProductController(productService)
 	//route v1 config
-	Routes.ConfigureV1(server, clientController)
+	Routes.ConfigureV1(server, clientController, productController)
 	//running server
 	err := server.Run()
 	if err != nil {
