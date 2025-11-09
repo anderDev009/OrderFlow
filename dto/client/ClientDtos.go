@@ -11,9 +11,11 @@ type DtoGet struct {
 	baseClientDto
 }
 type DtoUpdate struct {
-	ID uint `json:"id"`
-	baseClientDto
+	ID         uint   `json:"id" binding:"required"`
+	ClientName string `json:"client_name" binding:"required"`
+	Rnc        string `json:"rnc" binding:"required"`
 }
 type DtoAdd struct {
-	baseClientDto
+	ClientName string `json:"client_name" binding:"required"`
+	Rnc        string `json:"rnc" binding:"required"`
 }
