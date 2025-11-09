@@ -6,13 +6,16 @@ import (
 	"orderflow.com/v2/Repositories"
 	"orderflow.com/v2/Routes"
 	"orderflow.com/v2/Services"
+	"orderflow.com/v2/database"
 )
 
 func main() {
 	server := gin.Default()
+	//database object
+	ctx := database.GetContext()
 	//dependency injection
 	//repositories
-	clientRepository := Repositories.NewClientRepository()
+	clientRepository := Repositories.NewClientRepository(ctx)
 	//services
 	clientService := Services.NewClientService(clientRepository)
 	//configurando controladores

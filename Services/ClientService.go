@@ -15,5 +15,8 @@ type ClientService struct {
 func NewClientService(repo repositories.IClientRepository) *ClientService {
 	return &ClientService{
 		repository: repo,
+		BaseService: BaseService[models.Client, client.DtoAdd, client.DtoGet, client.DtoUpdate]{
+			repository: repo,
+		},
 	}
 }

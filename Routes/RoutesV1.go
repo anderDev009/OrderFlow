@@ -7,8 +7,7 @@ import (
 )
 
 func ConfigureV1(server *gin.Engine, clientController *Controllers.ClientController) {
-	routeV1 := server.Group("/v1")
+	routeV1 := server.Group("api/v1")
 	//client routes
-	clientRoutes := routeV1.Group("/client")
-	Client.ConfigureClientRoutesV1(clientRoutes, clientController)
+	Client.ConfigureClientRoutesV1(routeV1, clientController)
 }

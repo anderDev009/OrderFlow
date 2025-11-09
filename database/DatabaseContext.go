@@ -9,7 +9,7 @@ import (
 var dbGorm *gorm.DB
 
 func init() {
-	dsn := "orderflowuser:orderflowpass@mysql/orderflowdb?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "orderflowuser:orderflowpass@tcp(mysql:3306)/orderflowdb?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
