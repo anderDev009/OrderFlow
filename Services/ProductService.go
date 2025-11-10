@@ -7,7 +7,6 @@ import (
 )
 
 type ProductService struct {
-	repository repositories.IProductRepository
 	BaseServiceWithClientId[models.Product, Productdtos.DtoAdd, Productdtos.DtoGet, Productdtos.DtoUpdate]
 }
 
@@ -15,8 +14,8 @@ type ProductService struct {
 func NewProductService(repository repositories.IProductRepository) *ProductService {
 	base := BaseService[models.Product, Productdtos.DtoAdd, Productdtos.DtoGet, Productdtos.DtoUpdate]{repository: repository}
 	return &ProductService{
-		repository: repository,
 		BaseServiceWithClientId: BaseServiceWithClientId[models.Product, Productdtos.DtoAdd, Productdtos.DtoGet, Productdtos.DtoUpdate]{
+			repository:  repository,
 			BaseService: &base,
 		},
 	}
