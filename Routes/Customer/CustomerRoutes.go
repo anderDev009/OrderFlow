@@ -12,6 +12,6 @@ func ConfigureCustomerRoutes(server *gin.RouterGroup, controller *Controllers.Cu
 	customerGroup.GET("get/:id", controller.GetCustomer)
 	customerGroup.GET("/client/:id", controller.GetCustomersWithClientId)
 	customerGroup.POST("", controller.CreateCustomer)
-	customerGroup.PUT("", controller.CreateCustomer)
-	customerGroup.DELETE("/:id", controller.CreateCustomer)
+	customerGroup.PUT("", controller.UpdateCustomer)
+	customerGroup.DELETE("/:id", controller.DeleteCustomer)
 }
