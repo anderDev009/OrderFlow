@@ -1,17 +1,17 @@
 meta {
-  name: Obtener cliente por ID
+  name: Obtener un cliente por ID
   type: http
-  seq: 2
+  seq: 3
 }
 
 get {
-  url: localhost:8080/api/v1/client/get/:id
+  url: 127.0.0.1:8080/api/v1/customer/get/:id
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 1
+  id: 6
 }
 
 settings {

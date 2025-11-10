@@ -13,13 +13,11 @@ type ProductService struct {
 
 // constructor
 func NewProductService(repository repositories.IProductRepository) *ProductService {
+	base := BaseService[models.Product, Productdtos.DtoAdd, Productdtos.DtoGet, Productdtos.DtoUpdate]{repository: repository}
 	return &ProductService{
 		repository: repository,
 		BaseServiceWithClientId: BaseServiceWithClientId[models.Product, Productdtos.DtoAdd, Productdtos.DtoGet, Productdtos.DtoUpdate]{
-			repository: repository,
-			BaseService: BaseService[models.Product, Productdtos.DtoAdd, Productdtos.DtoGet, Productdtos.DtoUpdate]{
-				repository: repository,
-			},
+			BaseService: &base,
 		},
 	}
 }

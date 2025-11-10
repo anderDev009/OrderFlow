@@ -12,12 +12,12 @@ type CustomerService struct {
 
 // constructor
 func NewCustomerService(repository repositories.ICustomerRepository) *CustomerService {
+	base := NewBaseService[models.Customer, Customerdtos.DtoAdd, Customerdtos.DtoGet, Customerdtos.DtoUpdate](repository, &models.Customer{})
 	return &CustomerService{
+
 		BaseServiceWithClientId[models.Customer, Customerdtos.DtoAdd, Customerdtos.DtoGet, Customerdtos.DtoUpdate]{
-			repository: repository,
-			BaseService: BaseService[models.Customer, Customerdtos.DtoAdd, Customerdtos.DtoGet, Customerdtos.DtoUpdate]{
-				repository: repository,
-			},
+			repository:  repository,
+			BaseService: base,
 		},
 	}
 }

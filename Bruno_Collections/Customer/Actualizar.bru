@@ -1,0 +1,27 @@
+meta {
+  name: Actualizar
+  type: http
+  seq: 4
+}
+
+put {
+  url: 127.0.0.1:8080/api/v1/customer/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id":29,
+    "customer_name": "Juan Pérez Actualizado",
+    "email": "juan.perez@example.com",
+    "phone_number": "+18095551234",
+    "client_id": 1
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,6 +1,7 @@
 package Controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -66,10 +67,11 @@ func (c *CustomerController) GetCustomer(ctx *gin.Context) {
 }
 func (c *CustomerController) CreateCustomer(ctx *gin.Context) {
 	var add Customerdtos.DtoAdd
-	if err := ctx.ShouldBind(&add); err != nil {
+	if err := ctx.ShouldBindJSON(&add); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	fmt.Print(add)
 	err := c.service.Create(&add)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -79,7 +81,7 @@ func (c *CustomerController) CreateCustomer(ctx *gin.Context) {
 }
 func (c *CustomerController) UpdateCustomer(ctx *gin.Context) {
 	var update Customerdtos.DtoUpdate
-	if err := ctx.ShouldBind(&update); err != nil {
+	if err := ctx.ShouldBindJSON(&update); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

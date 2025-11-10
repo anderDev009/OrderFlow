@@ -1,6 +1,6 @@
 package Customerdtos
 
-type dtoBase struct {
+type DtoBase struct {
 	CustomerName string `json:"customer_name" binding:"required"`
 	Email        string `json:"email" binding:"required"`
 	PhoneNumber  string `json:"phone_number" binding:"required"`
@@ -9,13 +9,13 @@ type dtoBase struct {
 
 type DtoGet struct {
 	ID uint `json:"id"`
-	dtoBase
+	DtoBase
 }
 
 type DtoAdd struct {
-	dtoBase
+	DtoBase
 }
 type DtoUpdate struct {
 	ID uint `json:"id"`
-	dtoBase
+	DtoBase
 }

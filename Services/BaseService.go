@@ -1,6 +1,8 @@
 package Services
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/copier"
 	"orderflow.com/v2/contracts/repositories"
 )
@@ -47,10 +49,18 @@ func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) GetAll() (*[]DtoGet, error) 
 }
 func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Create(Add *DtoAdd) error {
 	var entity T
-	errCopy := copier.Copy(&entity, Add)
+	fmt.Println("DTO")
+	fmt.Println(Add)
+
+	errCopy := copier.CopyWithOption(&entity, Add, copier.Option{
+		IgnoreEmpty: true,
+		DeepCopy:    true,
+	})
 	if errCopy != nil {
 		return errCopy
 	}
+	fmt.Println("Despues de mapear")
+	fmt.Println(entity)
 	err := b.repository.Create(&entity)
 	if err != nil {
 		return err

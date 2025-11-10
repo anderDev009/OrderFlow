@@ -1,6 +1,10 @@
 package Repositories
 
-import "gorm.io/gorm"
+import (
+	"fmt"
+
+	"gorm.io/gorm"
+)
 
 type BaseRepository[T any] struct {
 	//contexto
@@ -31,6 +35,8 @@ func (r *BaseRepository[T]) GetAll() (*[]T, error) {
 	return &entities, nil
 }
 func (r *BaseRepository[T]) Create(entity *T) error {
+	fmt.Println("En repositorio")
+	fmt.Println(*entity)
 	result := r.ctx.Create(entity)
 	return result.Error
 }
