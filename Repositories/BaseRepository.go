@@ -1,6 +1,8 @@
 package Repositories
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type BaseRepository[T any] struct {
 	//contexto
@@ -26,7 +28,7 @@ func (r *BaseRepository[T]) GetAll() (*[]T, error) {
 	var entities []T
 	result := r.ctx.Find(&entities)
 	if result.Error != nil {
-		return nil, result.Error
+		return &[]T{}, result.Error
 	}
 	return &entities, nil
 }

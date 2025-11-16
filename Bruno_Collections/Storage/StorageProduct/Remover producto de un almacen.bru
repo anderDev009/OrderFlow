@@ -1,0 +1,23 @@
+meta {
+  name: Remover producto de un almacen
+  type: http
+  seq: 3
+}
+
+patch {
+  url: 127.0.0.1:8080/api/v1/storage_product/extract/product
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "storage_id": 1,
+    "quantity": 3
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

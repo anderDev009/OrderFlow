@@ -1,0 +1,20 @@
+meta {
+  name: Listar almacenes por cliente
+  type: http
+  seq: 1
+}
+
+get {
+  url: 127.0.0.1:8080/api/v1/storage/client/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 1
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

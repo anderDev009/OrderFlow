@@ -1,0 +1,24 @@
+meta {
+  name: Agregar producto al almacen
+  type: http
+  seq: 1
+}
+
+post {
+  url: 127.0.0.1:8080/api/v1/storage_product/add/product
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "storage_id":1,
+    "product_id":7,
+    "quantity":2
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

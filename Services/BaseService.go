@@ -1,6 +1,8 @@
 package Services
 
 import (
+	"fmt"
+
 	"github.com/jinzhu/copier"
 	"orderflow.com/v2/contracts/repositories"
 )
@@ -25,8 +27,11 @@ func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) GetByID(id uint) (*DtoGet, e
 	if err != nil {
 		return &dto, err
 	}
-	//mapping the entity to dto
-	copier.Copy(&dto, entity)
+	//mapping the entity to Dto
+	errCopy := copier.Copy(&dto, entity)
+	if errCopy != nil {
+		return &dto, errCopy
+	}
 	return &dto, nil
 }
 
@@ -36,21 +41,38 @@ func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) GetAll() (*[]DtoGet, error) 
 	if err != nil {
 		return &[]DtoGet{}, err
 	}
-	copier.Copy(&dto, entities)
+	errCopy := copier.Copy(&dto, entities)
+	if errCopy != nil {
+		return &[]DtoGet{}, err
+	}
 	return &dto, nil
 }
-func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Create(DtoAdd *DtoAdd) error {
+func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Create(Add *DtoAdd) error {
 	var entity T
-	copier.Copy(&entity, DtoAdd)
+	fmt.Println("DTO")
+	fmt.Println(Add)
+
+	errCopy := copier.CopyWithOption(&entity, Add, copier.Option{
+		IgnoreEmpty: true,
+		DeepCopy:    true,
+	})
+	if errCopy != nil {
+		return errCopy
+	}
+	fmt.Println("Despues de mapear")
+	fmt.Println(entity)
 	err := b.repository.Create(&entity)
 	if err != nil {
 		return err
 	}
 	return nil
 }
-func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Update(DtoUpdate *DtoUpdate) error {
+func (b *BaseService[T, DtoAdd, DtoGet, DtoUpdate]) Update(Update *DtoUpdate) error {
 	var entity T
-	copier.Copy(&entity, DtoUpdate)
+	errCopy := copier.Copy(&entity, Update)
+	if errCopy != nil {
+		return errCopy
+	}
 	err := b.repository.Update(&entity)
 	if err != nil {
 		return err
