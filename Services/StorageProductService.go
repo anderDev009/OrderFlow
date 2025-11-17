@@ -1,6 +1,7 @@
 package Services
 
 import (
+	"github.com/jinzhu/copier"
 	"orderflow.com/v2/Dto/StorageProductDtos"
 	"orderflow.com/v2/contracts/repositories"
 	"orderflow.com/v2/models"
@@ -27,10 +28,15 @@ func (r *StorageProductService) ExtractProduct(id int, quantity float64) error {
 	err := r.repository.ExtractProduct(id, quantity)
 	return err
 }
-func (r *StorageProductService) GetProductsByStorageId(storageID uint) (*[]models.StorageProduct, error) {
+func (r *StorageProductService) GetProductsByStorageId(storageID uint) (*[]StorageProductDtos.DtoGet, error) {
+	var productsMapped []StorageProductDtos.DtoGet
 	products, err := r.repository.GetProductsByStorageId(storageID)
 	if err != nil {
 		return nil, err
 	}
-	return products, nil
+	errCopy := copier.Copy(&productsMapped, products)
+	if errCopy != nil {
+		return nil, errCopy
+	}
+	return &productsMapped, nil
 }

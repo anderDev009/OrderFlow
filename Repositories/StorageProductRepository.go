@@ -76,7 +76,10 @@ func (r *StorageProductRepository) ExtractProduct(id int, quantity float64) erro
 }
 func (r *StorageProductRepository) GetProductsByStorageId(storageID uint) (*[]models.StorageProduct, error) {
 	var products []models.StorageProduct
-	err := r.ctx.Where("storage_id = ?", storageID).Find(&products).Error
+	err := r.ctx.Where("storage_id = ?", storageID).
+		Preload("Storage").
+		Preload("Product").
+		Find(&products).Error
 	if err != nil {
 		return &[]models.StorageProduct{}, err
 	}
