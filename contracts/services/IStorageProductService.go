@@ -10,5 +10,5 @@ type IStorageProductService interface {
 		StorageProductDtos.DtoGet,
 		StorageProductDtos.DtoUpdate]
 	ExtractProduct(id int, quantity float64) error
-	GetProductsByStorageId(storageID uint) (*[]models.StorageProduct, error)
+	GetProductsByStorageId(storageID uint) (*[]StorageProductDtos.DtoGet, error)
 }

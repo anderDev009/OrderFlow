@@ -1,5 +1,10 @@
 package StorageProductDtos
 
+import (
+	"orderflow.com/v2/Dto/Productdtos"
+	"orderflow.com/v2/Dto/StorageDtos"
+)
+
 type BaseDto struct {
 	StorageId uint `json:"storage_id"`
 	ProductId uint `json:"product_id"`
@@ -9,6 +14,10 @@ type BaseDto struct {
 type DtoGet struct {
 	ID uint `json:"id"`
 	BaseDto
+	Storage StorageDtos.StorageDtoGet
+	Product Productdtos.DtoGet
+}
+type ProductDto struct {
 }
 type DtoAdd struct {
 	BaseDto
