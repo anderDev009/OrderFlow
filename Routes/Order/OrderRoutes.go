@@ -10,10 +10,13 @@ func ConfigureRoutes(router *gin.RouterGroup, orderController *Controllers.Order
 	//methos GET
 	orders.GET("/get/client/:id", orderController.GetOrdersByClientId)
 	orders.GET("/get/:id", orderController.GetOrdersByClientId)
+	orders.GET("/get/detail/:id", orderController.GetOrderWithDetails)
 	//methods POST
 	orders.POST("", orderController.AddOrder)
+	orders.POST("/add/detail", orderController.AddOrderDetail)
 	//UPDATE
 	orders.PUT("", orderController.UpdateOrder)
 	//DELETE
 	orders.DELETE("/:id", orderController.DeleteOrder)
+	orders.DELETE("/detail/:id", orderController.DeleteOrder)
 }

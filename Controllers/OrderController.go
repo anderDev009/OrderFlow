@@ -92,3 +92,52 @@ func (controller *OrderController) DeleteOrder(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusNoContent, nil)
 }
+
+// add details
+func (controller *OrderController) AddOrderDetail(ctx *gin.Context) {
+	var dtoAddDetail OrderDtos.DtoAddDetail
+	if err := ctx.ShouldBind(&dtoAddDetail); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	//calling service
+	err := controller.service.AddDetail(&dtoAddDetail)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusCreated, dtoAddDetail)
+}
+
+// remove detail
+func (controller *OrderController) RemoveDetail(ctx *gin.Context) {
+	idStr := ctx.Param("id")
+	id, err := strconv.ParseUint(idStr, 10, 64)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	errDel := controller.service.RemoveDetail(uint(id))
+	if errDel != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": errDel.Error()})
+		return
+	}
+	ctx.JSON(http.StatusNoContent, nil)
+}
+
+// get order with details
+func (controller *OrderController) GetOrderWithDetails(ctx *gin.Context) {
+	idStr := ctx.Param("id")
+	id, err := strconv.ParseUint(idStr, 10, 64)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	//calling service
+	order, err := controller.service.GetOrderWithDetails(uint(id))
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, order)
+}

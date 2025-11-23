@@ -23,7 +23,7 @@ func NewOrderRepository(ctx *gorm.DB) *OrderRepository {
 }
 
 // AddDetail function to add detail to order
-func (order *OrderRepository) AddDetail(orderDetail models.OrderDetail) error {
+func (order *OrderRepository) AddDetail(orderDetail *models.OrderDetail) error {
 	err := order.ctx.Save(&orderDetail).Error
 	if err != nil {
 		return err
@@ -54,6 +54,7 @@ func (order *OrderRepository) GetOrderWithDetails(orderId uint) (models.Order, e
 	//get order with relations
 	err := order.ctx.
 		Preload("OrderDetail").
+		Preload("OrderDetail.Product").
 		Find(&orderDetail, orderId).Error
 
 	if err != nil {

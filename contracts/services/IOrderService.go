@@ -7,4 +7,7 @@ import (
 
 type IOrderService interface {
 	IBaseServiceWithClientId[models.Order, OrderDtos.DtoAdd, OrderDtos.DtoGet, OrderDtos.DtoUpdate]
+	AddDetail(orderDetail *OrderDtos.DtoAddDetail) error
+	RemoveDetail(idDetail uint) error
+	GetOrderWithDetails(orderId uint) (OrderDtos.DtoGetWithDetails, error)
 }
