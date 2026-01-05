@@ -21,9 +21,17 @@ pipeline {
             }
         }
         stage("Logging dockerhub"){
-            steps{
+            steps {
+                //credenciales
+                withCredentiales ([
+                    usernamePassword {
+                        credentialsId: 'personal_dockerhub_credentials',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    }
+                ])
                 sh """
-                    echo $PERSONAL_DOCKER_PASSW | docker login -u $PERSONAL_DOCKER_USER --password-stdin
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                 """
             }
         }
