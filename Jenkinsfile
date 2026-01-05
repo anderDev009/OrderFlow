@@ -23,7 +23,7 @@ pipeline {
         stage("Logging dockerhub"){
             steps {
                 //credenciales
-                withCredentiales ([
+                withCredentials ([
                     usernamePassword {
                         credentialsId: 'personal_dockerhub_credentials',
                         usernameVariable: 'DOCKER_USER',
