@@ -10,5 +10,5 @@ type Product struct {
 	Client Client `gorm:"foreignKey:ClientId;references:ID"`
 	//Nav property
 	StorageProducts []StorageProduct `gorm:"foreignKey:ProductId;references:ID"`
-	OrderDetails    []OrderDetail    `gorm:"foreignKey:ProductId;references:ID"`
+	// OrderDetails    []OrderDetail    `gorm:"foreignKey:ProductId;references:ID"`
 }
